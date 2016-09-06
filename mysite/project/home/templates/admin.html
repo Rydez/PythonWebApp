@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Admin Page</h1>
+    <h2>My stuff! No touching!</h2>
+
+    <br><br>
+
+    {% for post in posts %}
+
+        <form class="navbar-form navbar-left" method="post" action="/deletepost/{{ post.id }}">
+            <button type="submit" value="Delete" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </form>
+        <strong>Title: </strong>{{ post.title }}
+        <br>
+        <strong>Description: </strong>{{ post.description }}
+        <br><br>
+
+    {% endfor %}
+
+    <br><br><br><br>
+
+    <h4>Add a Post!</h4>
+    <br>
+
+    {% from "formhelpers.html" import render_field %}
+    <form method="post" action="/admin/" role="form" class="navbar-form navbar-left">
+        <div class="form-group">
+            <dl>
+                {{ post_form.csrf_token }}
+                {{ render_field(post_form.title) }}<br>
+                {{ render_field(post_form.description) }}
+            </dl>
+        </div>
+        <p>
+            <input type="submit" name="button" value="Post" class="btn btn-info">
+        </p>
+    </form>
+</div>
+
+{% endblock %}

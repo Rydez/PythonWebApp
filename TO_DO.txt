@@ -1,0 +1,11 @@
+The environment variable should change the configuration based on that app's
+environment. This must be done using a remote git which can only be done on
+paid accounts. Must come back to this when necessary, nessecity will arise
+around the time of purchasing a pythonanywhere account.
+https://www.youtube.com/watch?v=Y-ONxFkAUJc
+
+
+
+Organize the application using the Flask feature, Blueprints. This will
+modularize the application, which is necessary for when the app outgrows its
+current organizational paradigm. https://www.youtube.com/watch?v=TwNp1UagE9U

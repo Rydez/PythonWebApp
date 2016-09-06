@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Heres are some posts!</h2>
+
+        <br><br>
+
+        {% for post in posts %}
+        <div class="panel panel-default">
+            <div class="form-group pull-left">
+                <br>
+
+            {% if user_votes == None or user_votes|length == 0 %}
+                <form class="navbar-form" method="post" action="/upvotepost/{{ post.id }}">
+                    <button type="submit" value="Upvote" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
+                </form>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ post.votes }}
+                <form class="navbar-form" method="post" action="/downvotepost/{{ post.id }}">
+                    <button type="submit" value="Downvote" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    </button>
+                </form>
+            {% elif (post.id,) not in voted_posts %}
+                <form class="navbar-form" method="post" action="/upvotepost/{{ post.id }}">
+                    <button type="submit" value="Upvote" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </button>
+                </form>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ post.votes }}
+                <form class="navbar-form" method="post" action="/downvotepost/{{ post.id }}">
+                    <button type="submit" value="Downvote" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                    </button>
+                </form>
+            {% else %}
+
+                {% for vote in user_votes %}
+                    {% if vote.voted_post == post.id %}
+                        {% if vote.vote_value == 1 %}
+                            <form class="navbar-form" method="post" action="/upvotepost/{{ post.id }}">
+                                <button type="submit" value="Upvote" class="btn btn-inverse btn-xs">
+                                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {{ post.votes }}
+                            <form class="navbar-form" method="post" action="/downvotepost/{{ post.id }}">
+                                <button type="submit" value="Downvote" class="btn btn-default btn-xs">
+                                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                </button>
+                            </form>
+
+                        {% elif vote.vote_value == -1 %}
+                            <form class="navbar-form" method="post" action="/upvotepost/{{ post.id }}">
+                                <button type="submit" value="Upvote" class="btn btn-default btn-xs">
+                                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {{ post.votes }}
+                            <form class="navbar-form" method="post" action="/downvotepost/{{ post.id }}">
+                                <button type="submit" value="Downvote" class="btn btn-inverse btn-xs">
+                                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+            </div>
+            <div class="container-fluid">
+                <br><br>
+                <strong>Title: </strong>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+                <br>
+                <strong>Description: </strong>{{ post.description }}
+                <br>
+                <strong>Author: </strong>{{ post.author }}
+            </div>
+        </div>
+        {% endfor %}
+
+        <br><br><br><br>
+
+        {% if current_user.is_authenticated() %}
+            <h4>Add a Post!</h4>
+            <br>
+            {% from "formhelpers.html" import render_field %}
+
+            <form method="post" action="/" role="form" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <dl>
+                        {{ post_form.csrf_token }}
+                        {{ render_field(post_form.title) }}<br>
+                        {{ render_field(post_form.link) }}<br>
+                        {{ render_field(post_form.description) }}
+                    </dl>
+                </div>
+                <p>
+                    <input type="submit" name="button" value="Post" class="btn btn-info">
+                </p>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

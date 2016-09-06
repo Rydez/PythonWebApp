@@ -1,0 +1,22 @@
+{% macro render_field(field) %}
+    {% if field.type == "BooleanField" %}
+        <dd>
+            {{ field(**kwargs)|safe }}
+            &nbsp;&nbsp;
+            {{ field.label }}
+        </dd>
+    {% elif field.type == "TextAreaField" %}
+        <dd>{{ field(class='form-control', placeholder=field.label.text, **kwargs)|safe }}</dd>
+    {% else %}
+        <dd>{{ field(class='form-control', placeholder=field.label.text, **kwargs)|safe }}</dd>
+    {% endif %}
+
+    {% if field.errors %}
+        <ul class="navbar-text">
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endmacro %}

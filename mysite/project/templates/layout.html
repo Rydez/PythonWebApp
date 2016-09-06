@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RylonMcnz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ url_for('static',
+        filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static',
+        filename='favicon.ico') }}">
+    </head>
+
+    <header>
+        <div class="container" id="banner">
+  <div class="row">
+      <h1> MetaSite </h1>
+  </div>
+</div>
+        <div class="navbar navbar-inverse navbar-static">
+            <div class="container">
+                <div style="margin-top: 15px" class="navbar-left">
+                    <a href="/" class="navbar-link">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                        &nbsp;&nbsp;
+                        Home
+                    </a>
+                </div>
+                {% if current_user.is_authenticated() %}
+                    <div style="margin-top: 15px" class="navbar-left navbar-text">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        Hello {{ current_user.name }}!
+                    </div>
+                    <div style="margin-top: 15px" class="navbar-right">
+                        <a href="/logout/" class="navbar-link"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Logout</a>
+                    </div>
+                {% else %}
+                    <div style="margin-top: 15px" class="navbar-right">
+                        <a href="/register/" class="navbar-link"><span class="glyphicon glyphicon-pencil"></span>
+                            &nbsp;&nbsp;Register
+                        </a>
+                    </div>
+                    {% from "formhelpers.html" import render_field %}
+                    <form action="/" class="navbar-form navbar-right" method="post">
+                        <div class="navbar-text">
+                            {% if error %}
+                                <strong>Error: </strong>{{error}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ login_form.csrf_token }}
+                            {{ render_field(login_form.login_user) }}
+                        </div>
+                        <div class="form-group">
+                            {{ render_field(login_form.login_pass) }}
+                        </div>
+                        <input type="submit" name="button" value="Login" class="btn btn-info">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <body>
+        <div class="container-fluid" style="min-height:100% width:80%">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        {% block body %}{% endblock %}
+
+
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static',
+        filename='js/bootstrap.min.js') }}"></script>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+

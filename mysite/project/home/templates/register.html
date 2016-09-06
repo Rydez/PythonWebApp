@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <br>
+
+    <div class="container">
+        <p>Register</p>
+        {% from "formhelpers.html" import render_field %}
+
+        <form method="post" action="/register/" role="form" class="navbar-form navbar-left">
+            <div class="form-group">
+                <dl>
+                    {{ registration_form.csrf_token }}
+                    {{ render_field(registration_form.username) }}<br>
+                    {{ render_field(registration_form.email) }}<br>
+                    {{ render_field(registration_form.password) }}<br>
+                    {{ render_field(registration_form.confirm_password) }}<br>
+                    {{ render_field(registration_form.accept_tos) }}<br>
+                </dl>
+            </div>
+            <p>
+                <input type="submit" name="button" value="Register" class="btn btn-info">
+            </p>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}
