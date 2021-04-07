@@ -19,7 +19,7 @@ bleach==1.2.2
 blessings==1.6
 blinker==1.2
 boto==2.3.0
-bottle==0.11.6
+bottle==0.12.19
 bottlenose==0.6.2
 bpython==0.14.2
 BTrees==4.0.8
