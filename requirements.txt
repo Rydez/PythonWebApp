@@ -8,7 +8,7 @@ appdirs==1.4.0
 argh==0.26.1
 async==0.6.1
 Augustus==0.5.3.0
-Babel==0.9.6
+Babel==2.9.1
 basemap==1.0.7
 bashplotlib==0.4.4
 beanstalkc==0.3.0
