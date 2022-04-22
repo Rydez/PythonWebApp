@@ -223,7 +223,7 @@ pymc==2.3.2
 pymongo==2.5.2
 pyOpenSSL==0.13
 pyparsing==1.5.7
-PyPDF2==1.25.1
+PyPDF2==1.27.5
 pypdfocr==0.7.4
 Pyphen==0.9.1
 pypng==0.0.18
