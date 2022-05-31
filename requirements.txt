@@ -200,7 +200,7 @@ psutil==1.2.1
 psycopg2==2.5
 pudb==2013.3.2
 py-bcrypt==0.4
-PyAMF==0.6.1
+PyAMF==0.8.0
 pyasn1==0.1.7
 PyChart==1.39
 pycparser==2.14
