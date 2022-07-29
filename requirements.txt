@@ -273,7 +273,7 @@ s3cmd==1.1.0b3
 scikit-learn==0.14.1
 scikits.statsmodels==0.3.1
 scipy==0.14.0
-Scrapy==0.16.5
+Scrapy==2.6.2
 selenium==2.33.0
 setproctitle==1.1.7
 Shapely==1.3.1
