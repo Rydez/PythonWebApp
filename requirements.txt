@@ -331,7 +331,7 @@ venusian==1.0a8
 virtualenv==13.1.2
 virtualenv-clone==0.2.6
 virtualenvwrapper==4.7.1
-VTK==5.8.0
+VTK==9.0.1
 w3lib==1.3
 Wand==0.3.8
 watchdog==0.8.3
